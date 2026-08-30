@@ -12,6 +12,6 @@ app.use(cookieParser());
 
 
 const userRoutes = require('./routes/user.route');
-app.use('/api/user', userRoutes);
+app.use('/', userRoutes);
 
 module.exports = app;
