@@ -1,17 +1,21 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-require('dotenv').config();
-const connectDB = require('./db/db');
-require('dotenv').config();
-connectDB();
-app.use(cors());
-app.use(express.json());
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+const dotenv = require('dotenv')
+dotenv.config()
+const express = require('express')
+const app = express()
+const connect = require('./db/db')
+connect()
+const userRoutes = require('./routes/user.routes')
+const cookieParser = require('cookie-parser')
+const rabbitMq = require('./service/rabbit')
+
+rabbitMq.connect()
 
 
-const userRoutes = require('./routes/user.route');
-app.use('/', userRoutes);
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
-module.exports = app;
+
+app.use('/', userRoutes)
+
+module.exports = app

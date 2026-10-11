@@ -1,10 +1,13 @@
-const mongoose=require('mongoose');
-require('dotenv').config();
-async function connectDB()
-{
-   await mongoose.connect(process.env.DB_CONNECT)//halley is the namae of the database
-  console.log("connected to database");
+const mongoose = require('mongoose');
 
+
+function connect() {
+    mongoose.connect(process.env.MONGO_URL || process.env.DB_CONNECT).then(() => {
+        console.log('captain service connected to MongoDB');
+    }).catch(err => {
+        console.log(err);
+    });
 }
 
-module.exports=connectDB;
+
+module.exports = connect;

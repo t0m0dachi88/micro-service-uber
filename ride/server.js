@@ -1,10 +1,9 @@
+const http = require('http');
 const app = require('./app');
-const cors = require('cors');
 
-app.use(cors());
+const server = http.createServer(app);
 
-const PORT = process.env.PORT || 300;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+server.listen(3003, () => {
+    console.log('ride service is running on port 3003');
+})
